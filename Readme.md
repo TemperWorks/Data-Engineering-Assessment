@@ -62,7 +62,7 @@ Details of how to run and connect to the database are below, together with how t
 
 ## Pairing activity at your interview
 
-We will spend 90 minutes at your interview pairing with you. This will include:
+We will spend 60 minutes at your interview pairing with you. This will include:
 
 - Looking at your current code and solution.
 - Modifying your output code, to add several new output files containing different subsets of the data. Be prepared to make different queries of the database, to manipulate data in your programme code, and to output data to disk as JSON and CSV files.
