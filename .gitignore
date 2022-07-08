@@ -1,6 +1,5 @@
 .DS_Store
 .idea
 /venv
-/out
 /logs/*.txt
 /out/*.json
