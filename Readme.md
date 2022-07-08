@@ -1,3 +1,11 @@
+# How to use
+
+```commandline
+make up-with-build
+make load-data-into-mysql
+make export-data-from-mysql
+```
+
 # Temper.works code assignment for data engineering candidates
 
 ## Purpose
@@ -42,7 +50,7 @@ There are a sequence of steps that we would like you to complete. We hope this w
 2. Devise a database schema to hold the data in the people and places CSV files, and apply it to the MySQL database. You may apply this schema via a script, via the MySQL command-line client, or via a GUI client.
 3. Create a Docker image for loading the CSV files, places.csv and people.csv, into the tables you have created in the database. Make sure the appropriate config is in the docker compose file. Your data ingest process can be implemented in any way that you like, as long as it runs within a Docker container. You may implement this via programme code in Python, or via the use of ETL tools.
 4. Create a Docker image for outputting a summary of content in the database. You may implement this using a programming language of your choice. The output must be in JSON format, and be written to a file in the data folder called **data/summary_output.json**. It should consist of a list of the countries, and a count of how many people were born in that country. We have supplied a sample output **data/sample_output.json** to compare your file against.
-5. Share your repository with `django23`, so we can review your code ahead of your interview.
+5. Share your repository **privatly** with `django23` at least 24 hours prior to the Technical Interview, so we can review your code ahead of your interview.
 
 We have provided an example schema and code that shows how to handle a simple data ingest and output.
 

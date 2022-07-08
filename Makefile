@@ -3,21 +3,31 @@ DOCKER_COMP_F = $(DOCKER_COMP) -f docker-compose.yaml
 .DEFAULT_GOAL = help
 .PHONY        = help
 
-
 ## —————————— 🎵 Commands 🎵 ————————————————————————————————
 help: ## Outputs this help screen
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | sed -E 's/(\.dev\.ignore\/)?Makefile?\://' |  awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 up: ## Start database
 	$(DOCKER_COMP_F) up -d database # It can take some time for mysql to be ready
 build: ## Build
-	$(DOCKER_COMP_F) build database example-python
+	$(DOCKER_COMP_F) build database data-loader data-exporter
 up-with-build: build up ## Build & Start database
-up-no-build: up # Start containers without building
+up-no-build: up ## Start containers without building
 down: ## Stop containers
 	$(DOCKER_COMP_F) down
+load-data-into-mysql:	## Loads data into the MySQL database
+	docker run \
+	--mount type=bind,source=$(PWD)/logs,target=/app/logs \
+	--mount type=bind,source="$(PWD)"/data,target=/app/data \
+	--network="host" \
+	data-loader
+export-data-from-mysql:	## Exports data from the MySQL database
+	docker run \
+	--mount type=bind,source=$(PWD)/logs,target=/app/logs \
+	--mount type=bind,source="$(PWD)"/out,target=/app/out \
+	--network="host" \
+	data-exporter
 
 ## —————————— 🎵 Development 🎵 —————————————————————————————
-
 run: up-no-build ## Run without rebuilding
 	$(DOCKER_COMP) run example-python #Update the name of you app
 run-build: up-with-build ## Run - with build

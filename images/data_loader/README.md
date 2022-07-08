@@ -1,0 +1,1 @@
+Creates MySQL tables and loads data from the designated files into the database.

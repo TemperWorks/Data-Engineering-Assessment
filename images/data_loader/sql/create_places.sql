@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS places;
+CREATE TABLE `places` (
+  `id`      INT          NOT NULL AUTO_INCREMENT,
+  `city`    VARCHAR(200) DEFAULT NULL,
+  `county`  VARCHAR(200) DEFAULT NULL,
+  `country` VARCHAR(200) DEFAULT NULL
+  PRIMARY KEY (`id`)
+);

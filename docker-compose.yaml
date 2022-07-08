@@ -1,6 +1,7 @@
 version: "3.7"
 
 services:
+
   database:
     image: mysql:8.0
     platform: linux/amd64
@@ -11,27 +12,24 @@ services:
       - MYSQL_DATABASE=temper_code_test
       - MYSQL_USER=temper_code_test
       - MYSQL_PASSWORD=good_luck
-#    ports:
-#      - "3306:3306"
+    ports:
+      - "3306:3306"
     restart: always
 
-  example-node:
-    image: example-node
-    build: images/example-node
-    command: ["./example.js"]
+  data-loader:
+    image: data-loader:latest
+    build: images/data_loader
+    network_mode: "host"
+    command: ["python data_loader.py"]
     volumes:
+      - ./logs:/logs
       - ./data:/data
 
-  example-python:
-    image: example-python
-    build: images/example-python
-    command: ["./example.py"]
+  data-exporter:
+    image: data-exporter:latest
+    build: images/data_exporter
+    network_mode: "host"
+    command: [ "python data_exporter.py" ]
     volumes:
-      - ./data:/data
-
-  example-r:
-    image: example-r
-    build: images/example-r
-    command: ["./example.R"]
-    volumes:
-      - ./data:/data
+      - ./logs:/logs
+      - ./out:/out
